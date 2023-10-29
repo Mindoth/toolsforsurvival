@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  S",
+    " R ",
+    "R  "
+  ],
+
+  "key": {
+    "R": {
+      "tag": "forge:rods/wooden"
+    },
+    "S": {
+      "tag": "forge:cobblestone"
+    }
+  },
+
+  "result": {
+    "item": "toolsforsurvival:javelin",
+    "count": 1
+  }
+}
