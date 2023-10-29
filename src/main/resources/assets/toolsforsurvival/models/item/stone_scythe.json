@@ -5,7 +5,8 @@
     "parent": "item/handheld",
     "texture_size": [32, 32],
     "textures": {
-      "layer0": "toolsforsurvival:items/stone_scythe_model"
+      "layer0": "toolsforsurvival:items/stone_scythe_model",
+      "particle": "toolsforsurvival:items/stone_scythe_model"
     },
     "display": {
       "thirdperson_righthand": {

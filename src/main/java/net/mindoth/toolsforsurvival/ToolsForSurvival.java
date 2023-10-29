@@ -1,5 +1,6 @@
 package net.mindoth.toolsforsurvival;
 
+import net.mindoth.toolsforsurvival.loot.ToolsForSurvivalLootModifiers;
 import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalEntities;
 import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalItems;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,5 +24,6 @@ public class ToolsForSurvival {
     private void addRegistries(final IEventBus modEventBus) {
         ToolsForSurvivalItems.REGISTRY.register(modEventBus);
         ToolsForSurvivalEntities.ENTITIES.register(modEventBus);
+        ToolsForSurvivalLootModifiers.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
     }
 }

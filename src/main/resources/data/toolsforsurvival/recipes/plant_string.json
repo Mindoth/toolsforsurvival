@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "toolsforsurvival:plant_fiber"
+    },
+    {
+      "item": "toolsforsurvival:plant_fiber"
+    },
+    {
+      "item": "toolsforsurvival:plant_fiber"
+    }
+  ],
+
+  "result": {
+    "item": "toolsforsurvival:plant_string",
+    "count": 1
+  }
+}

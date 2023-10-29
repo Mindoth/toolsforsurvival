@@ -1,0 +1,21 @@
+{
+  "type": "toolsforsurvival:plant_fiber_from_grass",
+  "conditions": [
+    {
+      "condition": "block_state_property",
+      "block": "minecraft:grass"
+    },
+    {
+      "condition": "minecraft:inverted",
+      "term": {
+        "condition": "minecraft:match_tool",
+        "predicate": {
+          "items": [
+            "minecraft:shears"
+          ]
+        }
+      }
+    }
+  ],
+  "item": "toolsforsurvival:plant_fiber"
+}
