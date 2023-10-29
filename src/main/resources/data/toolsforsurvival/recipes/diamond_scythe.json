@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMR",
+    " R ",
+    "R  "
+  ],
+
+  "key": {
+    "R": {
+      "tag": "forge:rods/wooden"
+    },
+    "M": {
+      "item": "minecraft:diamond"
+    }
+  },
+
+  "result": {
+    "item": "toolsforsurvival:diamond_scythe",
+    "count": 1
+  }
+}

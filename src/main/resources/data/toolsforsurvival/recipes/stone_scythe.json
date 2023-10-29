@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMR",
+    " R ",
+    "R  "
+  ],
+
+  "key": {
+    "R": {
+      "tag": "forge:rods/wooden"
+    },
+    "M": {
+      "tag": "forge:cobblestone"
+    }
+  },
+
+  "result": {
+    "item": "toolsforsurvival:stone_scythe",
+    "count": 1
+  }
+}

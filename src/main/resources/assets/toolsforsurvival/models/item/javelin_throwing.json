@@ -1,0 +1,92 @@
+{
+  "gui_light": "front",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "credit": "Made with Blockbench",
+    "texture_size": [32, 32],
+    "textures": {
+      "0": "toolsforsurvival:items/javelin_model",
+      "particle": "toolsforsurvival:items/javelin_model"
+    },
+    "elements": [
+      {
+        "from": [0, 0, 0],
+        "to": [1, 30, 1],
+        "faces": {
+          "north": {"uv": [0, 0, 0.5, 15], "texture": "#0"},
+          "east": {"uv": [0.5, 0, 1, 15], "texture": "#0"},
+          "south": {"uv": [1, 0, 1.5, 15], "texture": "#0"},
+          "west": {"uv": [1.5, 0, 2, 15], "texture": "#0"},
+          "up": {"uv": [4, 1, 3.5, 0.5], "texture": "#0"},
+          "down": {"uv": [4, 1, 3.5, 1.5], "texture": "#0"}
+        }
+      },
+      {
+        "from": [-1, 26, 0],
+        "to": [0, 29, 1],
+        "faces": {
+          "north": {"uv": [2, 0, 2.5, 1.5], "texture": "#0"},
+          "east": {"uv": [2, 1.5, 2.5, 3], "texture": "#0"},
+          "south": {"uv": [2.5, 0, 3, 1.5], "texture": "#0"},
+          "west": {"uv": [2.5, 1.5, 3, 3], "texture": "#0"},
+          "up": {"uv": [3.5, 3.5, 3, 3], "texture": "#0"},
+          "down": {"uv": [4, 0, 3.5, 0.5], "texture": "#0"}
+        }
+      },
+      {
+        "from": [1, 26, 0],
+        "to": [2, 29, 1],
+        "faces": {
+          "north": {"uv": [3, 0, 3.5, 1.5], "texture": "#0"},
+          "east": {"uv": [3, 1.5, 3.5, 3], "texture": "#0"},
+          "south": {"uv": [2, 3, 2.5, 4.5], "texture": "#0"},
+          "west": {"uv": [2.5, 3, 3, 4.5], "texture": "#0"},
+          "up": {"uv": [4, 2, 3.5, 1.5], "texture": "#0"},
+          "down": {"uv": [4, 2, 3.5, 2.5], "texture": "#0"}
+        }
+      }
+    ],
+    "display": {
+      "thirdperson_righthand": {
+        "rotation": [ 0, 90, 180 ],
+        "translation": [ 7.5, 11, 8.5 ],
+        "scale": [ 1, 1, 1 ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [ 0, 90, 180 ],
+        "translation": [ 7.5, 11, -6.5 ],
+        "scale": [ 1, 1, 1 ]
+      },
+      "firstperson_righthand": {
+        "rotation": [ 0, -90, 25 ],
+        "translation": [ -3, -8, 12 ],
+        "scale": [ 1, 1, 1 ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [ 0, 90, -25 ],
+        "translation": [ 13, -8, 12.5 ],
+        "scale": [ 1, 1, 1 ]
+      }
+    }
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "toolsforsurvival:items/javelin_sprite"
+      }
+    },
+    "ground": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "toolsforsurvival:items/javelin_sprite"
+      }
+    },
+    "fixed": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "toolsforsurvival:items/javelin_sprite"
+      }
+    }
+  }
+}

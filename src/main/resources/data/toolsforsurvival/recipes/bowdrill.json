@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R S",
+    " SR",
+    "SRR"
+  ],
+
+  "key": {
+    "R": {
+      "tag": "forge:rods/wooden"
+    },
+    "S": {
+      "tag": "forge:string"
+    }
+  },
+
+  "result": {
+    "item": "toolsforsurvival:bowdrill",
+    "count": 1
+  }
+}
