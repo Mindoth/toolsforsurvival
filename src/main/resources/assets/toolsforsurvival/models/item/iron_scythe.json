@@ -5,8 +5,8 @@
     "parent": "item/handheld",
     "texture_size": [32, 32],
     "textures": {
-      "layer0": "toolsforsurvival:items/iron_scythe_model",
-      "particle": "toolsforsurvival:items/iron_scythe_model"
+      "layer0": "toolsforsurvival:item/iron_scythe_model",
+      "particle": "toolsforsurvival:item/iron_scythe_model"
     },
     "display": {
       "thirdperson_righthand": {
@@ -35,19 +35,19 @@
     "gui": {
       "parent": "item/generated",
       "textures": {
-        "layer0": "toolsforsurvival:items/iron_scythe"
+        "layer0": "toolsforsurvival:item/iron_scythe"
       }
     },
     "ground": {
       "parent": "item/generated",
       "textures": {
-        "layer0": "toolsforsurvival:items/iron_scythe"
+        "layer0": "toolsforsurvival:item/iron_scythe"
       }
     },
     "fixed": {
       "parent": "item/generated",
       "textures": {
-        "layer0": "toolsforsurvival:items/iron_scythe"
+        "layer0": "toolsforsurvival:item/iron_scythe"
       }
     }
   }

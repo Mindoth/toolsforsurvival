@@ -1,7 +1,6 @@
 package net.mindoth.toolsforsurvival.item;
 
 import net.mindoth.toolsforsurvival.ToolsForSurvival;
-import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -13,9 +12,9 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -32,12 +31,12 @@ public class ScytheItem extends SwordItem {
     @SubscribeEvent
     public static void onBlockBreak(final BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
-        Level level = player.getLevel();
+        Level level = player.level();
         if ( level.isClientSide ) return;
         if ( player.getAbilities().instabuild ) return;
         if ( !(player.getMainHandItem().getItem() instanceof ScytheItem) ) return;
         BlockState blockState = event.getState();
-        BlockPos playerPos = new BlockPos(player.getBoundingBox().getCenter());
+        Vec3 playerPos = player.getBoundingBox().getCenter();
         BlockPos blockPos = event.getPos();
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         Block block = blockState.getBlock();
@@ -45,7 +44,7 @@ public class ScytheItem extends SwordItem {
         if ( level instanceof ServerLevel serverLevel ) {
             List<ItemStack> drops = Block.getDrops(blockState, serverLevel, blockPos, blockEntity);
             for ( ItemStack itemStack : drops ) {
-                ItemEntity drop = new ItemEntity(level, playerPos.getX(), playerPos.getY(), playerPos.getZ(), itemStack);
+                ItemEntity drop = new ItemEntity(level, playerPos.x, playerPos.y, playerPos.z, itemStack);
                 drop.setDeltaMovement(0, 0, 0);
                 drop.setNoPickUpDelay();
                 level.addFreshEntity(drop);

@@ -5,8 +5,8 @@
     "credit": "Made with Blockbench",
     "texture_size": [32, 32],
     "textures": {
-      "0": "toolsforsurvival:items/javelin_model",
-      "particle": "toolsforsurvival:items/javelin_model"
+      "0": "toolsforsurvival:item/javelin_model",
+      "particle": "toolsforsurvival:item/javelin_model"
     },
     "elements": [
       {
@@ -73,19 +73,19 @@
     "gui": {
       "parent": "item/generated",
       "textures": {
-        "layer0": "toolsforsurvival:items/javelin_sprite"
+        "layer0": "toolsforsurvival:item/javelin_sprite"
       }
     },
     "ground": {
       "parent": "item/generated",
       "textures": {
-        "layer0": "toolsforsurvival:items/javelin_sprite"
+        "layer0": "toolsforsurvival:item/javelin_sprite"
       }
     },
     "fixed": {
       "parent": "item/generated",
       "textures": {
-        "layer0": "toolsforsurvival:items/javelin_sprite"
+        "layer0": "toolsforsurvival:item/javelin_sprite"
       }
     }
   },

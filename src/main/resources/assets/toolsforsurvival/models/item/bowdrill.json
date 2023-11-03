@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "toolsforsurvival:items/bowdrill"
+    "layer0": "toolsforsurvival:item/bowdrill"
   }
 }

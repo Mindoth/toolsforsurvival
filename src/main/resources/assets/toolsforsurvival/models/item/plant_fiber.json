@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "toolsforsurvival:items/plant_fiber"
+    "layer0": "toolsforsurvival:item/plant_fiber"
   }
 }

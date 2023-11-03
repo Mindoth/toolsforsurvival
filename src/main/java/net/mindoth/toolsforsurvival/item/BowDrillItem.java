@@ -72,13 +72,13 @@ public class BowDrillItem extends Item {
     public static void duringItemUse(final LivingEntityUseItemEvent.Tick event) {
         if ( event.getItem().getItem() != ToolsForSurvivalItems.BOW_DRILL.get() ) return;
         if ( !(event.getEntity() instanceof Player player) ) return;
-        if ( event.getDuration() == 1 && !player.getLevel().isClientSide ) event.getItem().hurtAndBreak(1, event.getEntity(), (holder) -> holder.broadcastBreakEvent(event.getEntity().getUsedItemHand()));
+        if ( event.getDuration() == 1 && !player.level().isClientSide ) event.getItem().hurtAndBreak(1, event.getEntity(), (holder) -> holder.broadcastBreakEvent(event.getEntity().getUsedItemHand()));
 
         HitResult result = player.pick(4.5D, 0.0f, false);
         if ( result.getType() != HitResult.Type.BLOCK ) return;
         BlockPos blockPos = ((BlockHitResult)result).getBlockPos();
 
-        if ( !(player.getLevel() instanceof ServerLevel level) ) return;
+        if ( !(player.level() instanceof ServerLevel level) ) return;
         level.sendParticles(ParticleTypes.SMOKE, blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5, 1, 0, 0, 0, 0);
     }
 
@@ -86,7 +86,7 @@ public class BowDrillItem extends Item {
     public static void itemUseFinish(final LivingEntityUseItemEvent.Finish event) {
         if ( event.getItem().getItem() != ToolsForSurvivalItems.BOW_DRILL.get() ) return;
         if ( !(event.getEntity() instanceof Player player) ) return;
-        Level level = player.getLevel();
+        Level level = player.level();
         if ( level.isClientSide ) return;
         ItemStack itemstack = event.getItem();
         if ( itemstack.getItem() != ToolsForSurvivalItems.BOW_DRILL.get() ) return;
@@ -94,7 +94,7 @@ public class BowDrillItem extends Item {
         HitResult result = player.pick(4.5D, 0.0f, false);
         if ( result.getType() != HitResult.Type.BLOCK ) return; 
         BlockPos blockPos = ((BlockHitResult)result).getBlockPos();
-        BlockState blockState = player.level.getBlockState(blockPos);
+        BlockState blockState = player.level().getBlockState(blockPos);
         Direction face = ((BlockHitResult) result).getDirection();
 
         if ( !CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState) ) {
