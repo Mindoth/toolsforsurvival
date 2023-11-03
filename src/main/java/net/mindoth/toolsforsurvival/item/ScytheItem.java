@@ -12,6 +12,7 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -51,7 +52,8 @@ public class ScytheItem extends SwordItem {
                 level.addFreshEntity(drop);
             }
         }
-        level.destroyBlock(blockPos, false);
+        //level.destroyBlock(blockPos, false);
+        level.removeBlock(blockPos, false);
         player.getMainHandItem().hurtAndBreak(1, player, (holder) -> holder.broadcastBreakEvent(EquipmentSlot.MAINHAND));
     }
 }

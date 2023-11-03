@@ -90,9 +90,9 @@ public class BowDrillItem extends Item {
         if ( level.isClientSide ) return;
         ItemStack itemstack = event.getItem();
         if ( itemstack.getItem() != ToolsForSurvivalItems.BOW_DRILL.get() ) return;
-        
+
         HitResult result = player.pick(4.5D, 0.0f, false);
-        if ( result.getType() != HitResult.Type.BLOCK ) return; 
+        if ( result.getType() != HitResult.Type.BLOCK ) return;
         BlockPos blockPos = ((BlockHitResult)result).getBlockPos();
         BlockState blockState = player.level.getBlockState(blockPos);
         Direction face = ((BlockHitResult) result).getDirection();
