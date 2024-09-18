@@ -4,7 +4,6 @@ import net.mindoth.toolsforsurvival.ToolsForSurvival;
 import net.mindoth.toolsforsurvival.item.BowDrillItem;
 import net.mindoth.toolsforsurvival.item.JavelinItem;
 import net.mindoth.toolsforsurvival.item.ScytheItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.registries.DeferredRegister;
@@ -26,21 +25,21 @@ public class ToolsForSurvivalItems {
     public static final RegistryObject<Item> PLANT_STRING = REGISTRY.register("plant_string",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> WOODEN_SCYTHE = REGISTRY.register("wooden_scythe",
-            () -> new ScytheItem(Tiers.WOOD, 4, -3.0f, new Item.Properties().durability(59)));
+    public static final RegistryObject<Item> WOODEN_SICKLE = REGISTRY.register("wooden_sickle",
+            () -> new ScytheItem(Tiers.WOOD, 2, -3.0f, new Item.Properties().durability(59)));
 
-    public static final RegistryObject<Item> STONE_SCYTHE = REGISTRY.register("stone_scythe",
-            () -> new ScytheItem(Tiers.STONE, 4, -3.0f, new Item.Properties().durability(131)));
+    public static final RegistryObject<Item> STONE_SICKLE = REGISTRY.register("stone_sickle",
+            () -> new ScytheItem(Tiers.STONE, 2, -3.0f, new Item.Properties().durability(131)));
 
-    public static final RegistryObject<Item> IRON_SCYTHE = REGISTRY.register("iron_scythe",
-            () -> new ScytheItem(Tiers.IRON, 4, -3.0f, new Item.Properties().durability(250)));
+    public static final RegistryObject<Item> IRON_SICKLE = REGISTRY.register("iron_sickle",
+            () -> new ScytheItem(Tiers.IRON, 2, -3.0f, new Item.Properties().durability(250)));
 
-    public static final RegistryObject<Item> GOLDEN_SCYTHE = REGISTRY.register("golden_scythe",
-            () -> new ScytheItem(Tiers.GOLD, 4, -3.0f, new Item.Properties().durability(32)));
+    public static final RegistryObject<Item> GOLDEN_SICKLE = REGISTRY.register("golden_sickle",
+            () -> new ScytheItem(Tiers.GOLD, 2, -3.0f, new Item.Properties().durability(32)));
 
-    public static final RegistryObject<Item> DIAMOND_SCYTHE = REGISTRY.register("diamond_scythe",
-            () -> new ScytheItem(Tiers.DIAMOND, 4, -3.0f, new Item.Properties().durability(1562)));
+    public static final RegistryObject<Item> DIAMOND_SICKLE = REGISTRY.register("diamond_sickle",
+            () -> new ScytheItem(Tiers.DIAMOND, 2, -3.0f, new Item.Properties().durability(1562)));
 
-    public static final RegistryObject<Item> NETHERITE_SCYTHE = REGISTRY.register("netherite_scythe",
-            () -> new ScytheItem(Tiers.NETHERITE, 4, -3.0f, new Item.Properties().durability(2032)));
+    public static final RegistryObject<Item> NETHERITE_SICKLE = REGISTRY.register("netherite_sickle",
+            () -> new ScytheItem(Tiers.NETHERITE, 2, -3.0f, new Item.Properties().durability(2032)));
 }

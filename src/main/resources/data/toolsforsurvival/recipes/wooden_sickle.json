@@ -11,12 +11,12 @@
       "tag": "forge:rods/wooden"
     },
     "M": {
-      "item": "minecraft:diamond"
+      "tag": "minecraft:planks"
     }
   },
 
   "result": {
-    "item": "toolsforsurvival:diamond_scythe",
+    "item": "toolsforsurvival:wooden_sickle",
     "count": 1
   }
 }

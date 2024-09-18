@@ -11,12 +11,12 @@
       "tag": "forge:rods/wooden"
     },
     "M": {
-      "tag": "minecraft:planks"
+      "item": "minecraft:iron_ingot"
     }
   },
 
   "result": {
-    "item": "toolsforsurvival:wooden_scythe",
+    "item": "toolsforsurvival:iron_sickle",
     "count": 1
   }
 }

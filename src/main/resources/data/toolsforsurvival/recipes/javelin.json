@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "  S",
-    " R ",
+    " SM",
+    " RS",
     "R  "
   ],
 
@@ -10,8 +10,11 @@
     "R": {
       "tag": "forge:rods/wooden"
     },
-    "S": {
+    "M": {
       "tag": "forge:cobblestone"
+    },
+    "S": {
+      "tag": "forge:string"
     }
   },
 

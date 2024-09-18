@@ -11,12 +11,12 @@
       "tag": "forge:rods/wooden"
     },
     "M": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:gold_ingot"
     }
   },
 
   "result": {
-    "item": "toolsforsurvival:iron_scythe",
+    "item": "toolsforsurvival:golden_sickle",
     "count": 1
   }
 }

@@ -3,11 +3,13 @@ package net.mindoth.toolsforsurvival.item;
 import net.mindoth.toolsforsurvival.ToolsForSurvival;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -22,11 +24,11 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = ToolsForSurvival.MOD_ID)
-public class ScytheItem extends SwordItem {
-    public ScytheItem(Tier p_43269_, int p_43270_, float p_43271_, Properties p_43272_) {
-        super(p_43269_, p_43270_, p_43271_, p_43272_);
-    }
+public class ScytheItem extends DiggerItem {
 
+    public ScytheItem(Tier p_43114_, float p_43115_, float p_43116_, Item.Properties p_43117_) {
+        super(p_43115_, p_43116_, p_43114_, BlockTags.MINEABLE_WITH_HOE, p_43117_);
+    }
 
     @SubscribeEvent
     public static void onBlockBreak(final BlockEvent.BreakEvent event) {
@@ -50,7 +52,8 @@ public class ScytheItem extends SwordItem {
                 level.addFreshEntity(drop);
             }
         }
-        level.destroyBlock(blockPos, false);
+        //level.destroyBlock(blockPos, false);
+        level.removeBlock(blockPos, false);
         player.getMainHandItem().hurtAndBreak(1, player, (holder) -> holder.broadcastBreakEvent(EquipmentSlot.MAINHAND));
     }
 }

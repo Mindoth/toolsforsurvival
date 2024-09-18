@@ -38,7 +38,7 @@ description='''
 Adds tools to help in difficult survival situations.
 '''
 
-[[dependencies.toolsforsurvival]] #optional
+[[dependencies.toolsforsurvival]]
     modId="forge"
     mandatory=true
     versionRange="[47,)"
@@ -49,5 +49,12 @@ Adds tools to help in difficult survival situations.
     modId="minecraft"
     mandatory=true
     versionRange="[1.20.1,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.toolsforsurvival]]
+    modId="shadowizardlib"
+    mandatory=true
+    versionRange="[1.1.9,)"
     ordering="NONE"
     side="BOTH"

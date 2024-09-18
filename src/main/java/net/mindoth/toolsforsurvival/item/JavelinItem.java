@@ -59,9 +59,7 @@ public class JavelinItem extends Item implements Vanishable {
             int i = this.getUseDuration(itemStack) - p_43397_;
             if (i >= 10) {
                 if (!level.isClientSide) {
-                    itemStack.hurtAndBreak(1, player, (p_43388_) -> {
-                        p_43388_.broadcastBreakEvent(livingEntity.getUsedItemHand());
-                    });
+                    itemStack.hurtAndBreak(1, player, (p_43388_) -> p_43388_.broadcastBreakEvent(livingEntity.getUsedItemHand()));
                 }
                 ThrownJavelinEntity thrownJavelin = new ThrownJavelinEntity(level, player, itemStack);
                 thrownJavelin.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);

@@ -3,7 +3,6 @@ package net.mindoth.toolsforsurvival;
 import net.mindoth.toolsforsurvival.loot.ToolsForSurvivalLootModifiers;
 import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalEntities;
 import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalItems;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -34,12 +33,12 @@ public class ToolsForSurvival {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if ( event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES ) {
             event.accept(ToolsForSurvivalItems.BOW_DRILL);
-            event.accept(ToolsForSurvivalItems.WOODEN_SCYTHE);
-            event.accept(ToolsForSurvivalItems.STONE_SCYTHE);
-            event.accept(ToolsForSurvivalItems.IRON_SCYTHE);
-            event.accept(ToolsForSurvivalItems.GOLDEN_SCYTHE);
-            event.accept(ToolsForSurvivalItems.DIAMOND_SCYTHE);
-            event.accept(ToolsForSurvivalItems.NETHERITE_SCYTHE);
+            event.accept(ToolsForSurvivalItems.WOODEN_SICKLE);
+            event.accept(ToolsForSurvivalItems.STONE_SICKLE);
+            event.accept(ToolsForSurvivalItems.IRON_SICKLE);
+            event.accept(ToolsForSurvivalItems.GOLDEN_SICKLE);
+            event.accept(ToolsForSurvivalItems.DIAMOND_SICKLE);
+            event.accept(ToolsForSurvivalItems.NETHERITE_SICKLE);
         }
         if ( event.getTabKey() == CreativeModeTabs.COMBAT ) {
             event.accept(ToolsForSurvivalItems.JAVELIN);

@@ -1,5 +1,6 @@
 package net.mindoth.toolsforsurvival.item;
 
+import net.mindoth.shadowizardlib.event.ShadowEvents;
 import net.mindoth.toolsforsurvival.ToolsForSurvival;
 import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalItems;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -31,6 +32,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -79,7 +81,13 @@ public class BowDrillItem extends Item {
         BlockPos blockPos = ((BlockHitResult)result).getBlockPos();
 
         if ( !(player.level() instanceof ServerLevel level) ) return;
-        level.sendParticles(ParticleTypes.SMOKE, blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5, 1, 0, 0, 0, 0);
+        Vec3 pos;
+        Vec3 freePoint = ShadowEvents.getPoint(level, player, 4.5F, 0.0F, true, false, false, false, false);
+        Vec3 blockPoint = ShadowEvents.getPoint(level, player, 4.5F, 0.0F, true, false, false, true, false);
+        if ( freePoint != blockPoint ) {
+            pos = ShadowEvents.getPoint(level, player, 4.5F, 0.0F, true, false, false, true, false);
+            level.sendParticles(ParticleTypes.SMOKE, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
+        }
     }
 
     @SubscribeEvent
@@ -90,9 +98,9 @@ public class BowDrillItem extends Item {
         if ( level.isClientSide ) return;
         ItemStack itemstack = event.getItem();
         if ( itemstack.getItem() != ToolsForSurvivalItems.BOW_DRILL.get() ) return;
-        
+
         HitResult result = player.pick(4.5D, 0.0f, false);
-        if ( result.getType() != HitResult.Type.BLOCK ) return; 
+        if ( result.getType() != HitResult.Type.BLOCK ) return;
         BlockPos blockPos = ((BlockHitResult)result).getBlockPos();
         BlockState blockState = player.level().getBlockState(blockPos);
         Direction face = ((BlockHitResult) result).getDirection();
