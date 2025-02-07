@@ -1,11 +1,11 @@
-package net.mindoth.toolsforsurvival.util;
+package net.mindoth.toolsforsurvival.client;
 
 import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
-public class ModItemProperties {
+public class ToolsForSurvivalProperties {
 
     public static void addCustomItemProperties() {
         makeTrident(ToolsForSurvivalItems.JAVELIN.get());

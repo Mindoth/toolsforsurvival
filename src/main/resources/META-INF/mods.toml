@@ -55,6 +55,6 @@ Adds tools to help in difficult survival situations.
 [[dependencies.toolsforsurvival]]
     modId="shadowizardlib"
     mandatory=true
-    versionRange="[1.1.9,)"
+    versionRange="[1.2.4,)"
     ordering="NONE"
     side="BOTH"

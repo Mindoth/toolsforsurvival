@@ -4,7 +4,7 @@ import net.mindoth.toolsforsurvival.client.ThrownJavelinModel;
 import net.mindoth.toolsforsurvival.client.ThrownJavelinRenderer;
 import net.mindoth.toolsforsurvival.client.ToolsForSurvivalLayers;
 import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalEntities;
-import net.mindoth.toolsforsurvival.util.ModItemProperties;
+import net.mindoth.toolsforsurvival.client.ToolsForSurvivalProperties;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -20,7 +20,7 @@ public class ToolsForSurvivalClient {
     }
 
     private static void clientSetup(final FMLClientSetupEvent event) {
-        ModItemProperties.addCustomItemProperties();
+        ToolsForSurvivalProperties.addCustomItemProperties();
     }
 
     public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

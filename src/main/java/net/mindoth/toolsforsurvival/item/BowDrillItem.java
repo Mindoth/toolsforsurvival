@@ -74,7 +74,9 @@ public class BowDrillItem extends Item {
     public static void duringItemUse(final LivingEntityUseItemEvent.Tick event) {
         if ( event.getItem().getItem() != ToolsForSurvivalItems.BOW_DRILL.get() ) return;
         if ( !(event.getEntity() instanceof Player player) ) return;
-        if ( event.getDuration() == 1 && !player.level().isClientSide ) event.getItem().hurtAndBreak(1, event.getEntity(), (holder) -> holder.broadcastBreakEvent(event.getEntity().getUsedItemHand()));
+        if ( event.getDuration() == 1 && !player.level().isClientSide ) {
+            event.getItem().hurtAndBreak(1, event.getEntity(), (holder) -> holder.broadcastBreakEvent(event.getEntity().getUsedItemHand()));
+        }
 
         HitResult result = player.pick(4.5D, 0.0f, false);
         if ( result.getType() != HitResult.Type.BLOCK ) return;
@@ -82,10 +84,10 @@ public class BowDrillItem extends Item {
 
         if ( !(player.level() instanceof ServerLevel level) ) return;
         Vec3 pos;
-        Vec3 freePoint = ShadowEvents.getPoint(level, player, 4.5F, 0.0F, true, false, false, false, false);
-        Vec3 blockPoint = ShadowEvents.getPoint(level, player, 4.5F, 0.0F, true, false, false, true, false);
+        Vec3 freePoint = ShadowEvents.getPoint(level, player, 4.5F, 0.0F, false, false, false, false);
+        Vec3 blockPoint = ShadowEvents.getPoint(level, player, 4.5F, 0.0F, false, false, true, false);
         if ( freePoint != blockPoint ) {
-            pos = ShadowEvents.getPoint(level, player, 4.5F, 0.0F, true, false, false, true, false);
+            pos = ShadowEvents.getPoint(level, player, 4.5F, 0.0F, false, false, true, false);
             level.sendParticles(ParticleTypes.SMOKE, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
         }
     }

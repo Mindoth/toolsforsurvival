@@ -1,21 +1,23 @@
 {
-  "type": "toolsforsurvival:plant_fiber_from_grass",
+  "type": "toolsforsurvival:add_item",
   "conditions": [
     {
-      "condition": "block_state_property",
-      "block": "minecraft:grass"
-    },
-    {
-      "condition": "minecraft:inverted",
-      "term": {
-        "condition": "minecraft:match_tool",
-        "predicate": {
-          "items": [
-            "minecraft:shears"
-          ]
+      "condition": "minecraft:any_of",
+      "terms": [
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:blocks/grass"
+        },
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:blocks/tall_grass"
+        },
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:blocks/fern"
         }
-      }
+      ]
     }
   ],
-  "item": "toolsforsurvival:plant_fiber"
+  "key": "toolsforsurvival:blocks/plant_fiber_from_grass"
 }
