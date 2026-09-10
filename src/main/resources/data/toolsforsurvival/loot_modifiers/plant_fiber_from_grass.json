@@ -5,23 +5,40 @@
       "condition": "minecraft:any_of",
       "terms": [
         {
-          "condition": "forge:loot_table_id",
-          "loot_table_id": "minecraft:blocks/grass"
+          "condition": "neoforge:loot_table_id",
+          "loot_table_id": "minecraft:blocks/short_grass"
         },
         {
-          "condition": "forge:loot_table_id",
+          "condition": "neoforge:loot_table_id",
           "loot_table_id": "minecraft:blocks/tall_grass"
         },
         {
-          "condition": "forge:loot_table_id",
+          "condition": "neoforge:loot_table_id",
           "loot_table_id": "minecraft:blocks/fern"
         },
         {
-          "condition": "forge:loot_table_id",
+          "condition": "neoforge:loot_table_id",
           "loot_table_id": "minecraft:blocks/large_fern"
         }
       ]
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.2
+    },
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "items": [
+          "toolsforsurvival:wooden_sickle",
+          "toolsforsurvival:stone_sickle",
+          "toolsforsurvival:iron_sickle",
+          "toolsforsurvival:golden_sickle",
+          "toolsforsurvival:diamond_sickle",
+          "toolsforsurvival:netherite_sickle"
+        ]
+      }
     }
   ],
-  "key": "toolsforsurvival:blocks/plant_fiber_from_grass"
+  "item": "toolsforsurvival:plant_fiber"
 }

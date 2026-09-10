@@ -3,17 +3,16 @@ package net.mindoth.toolsforsurvival;
 import net.mindoth.toolsforsurvival.client.ThrownJavelinModel;
 import net.mindoth.toolsforsurvival.client.ThrownJavelinRenderer;
 import net.mindoth.toolsforsurvival.client.ToolsForSurvivalLayers;
-import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalEntities;
 import net.mindoth.toolsforsurvival.client.ToolsForSurvivalProperties;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.mindoth.toolsforsurvival.registries.ModEntities;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 public class ToolsForSurvivalClient {
 
-    public static void registerHandlers() {
-        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public static void registerHandlers(IEventBus modBus, ModContainer modContainer) {
         modBus.addListener(ToolsForSurvivalClient::clientSetup);
         modBus.addListener(ToolsForSurvivalClient::registerEntityRenderers);
         modBus.addListener(ToolsForSurvivalClient::onRegisterLayerDefinitions);
@@ -28,6 +27,6 @@ public class ToolsForSurvivalClient {
     }
 
     private static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ToolsForSurvivalEntities.THROWN_JAVELIN.get(), ThrownJavelinRenderer::new);
+        event.registerEntityRenderer(ModEntities.THROWN_JAVELIN.get(), ThrownJavelinRenderer::new);
     }
 }

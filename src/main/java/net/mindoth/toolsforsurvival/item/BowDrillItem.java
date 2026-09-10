@@ -2,7 +2,7 @@ package net.mindoth.toolsforsurvival.item;
 
 import net.mindoth.shadowizardlib.event.ShadowEvents;
 import net.mindoth.toolsforsurvival.ToolsForSurvival;
-import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalItems;
+import net.mindoth.toolsforsurvival.registries.ModItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,7 +12,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,8 +19,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.Vanishable;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.CampfireBlock;
@@ -33,29 +30,24 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 
-@Mod.EventBusSubscriber(modid = ToolsForSurvival.MOD_ID)
+@EventBusSubscriber(modid = ToolsForSurvival.MOD_ID)
 public class BowDrillItem extends Item {
 
-    public BowDrillItem(Properties p_41383_) {
-        super(p_41383_);
+    public BowDrillItem(Properties properties) {
+        super(properties);
     }
 
     @Override
-    public boolean canBeDepleted() {
-        return true;
-    }
-
-    @Override
-    public int getUseDuration(ItemStack p_40680_) {
+    public int getUseDuration(ItemStack stack, LivingEntity living) {
         return 100;
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack p_40678_) {
+    public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.BOW;
     }
 
@@ -72,10 +64,13 @@ public class BowDrillItem extends Item {
 
     @SubscribeEvent
     public static void duringItemUse(final LivingEntityUseItemEvent.Tick event) {
-        if ( event.getItem().getItem() != ToolsForSurvivalItems.BOW_DRILL.get() ) return;
+        ItemStack stack = event.getItem();
+        if ( stack.getItem() != ModItems.BOW_DRILL.get() ) return;
         if ( !(event.getEntity() instanceof Player player) ) return;
-        if ( event.getDuration() == 1 && !player.level().isClientSide ) {
-            event.getItem().hurtAndBreak(1, event.getEntity(), (holder) -> holder.broadcastBreakEvent(event.getEntity().getUsedItemHand()));
+        if ( event.getDuration() == 1 && !player.level().isClientSide && player.level() instanceof ServerLevel level ) {
+
+            stack.hurtAndBreak(1, level, player,
+                    (holder) -> player.onEquippedItemBroken(stack.getItem(), player.getEquipmentSlotForItem(stack)));
         }
 
         HitResult result = player.pick(4.5D, 0.0f, false);
@@ -94,12 +89,12 @@ public class BowDrillItem extends Item {
 
     @SubscribeEvent
     public static void itemUseFinish(final LivingEntityUseItemEvent.Finish event) {
-        if ( event.getItem().getItem() != ToolsForSurvivalItems.BOW_DRILL.get() ) return;
+        if ( event.getItem().getItem() != ModItems.BOW_DRILL.get() ) return;
         if ( !(event.getEntity() instanceof Player player) ) return;
         Level level = player.level();
         if ( level.isClientSide ) return;
         ItemStack itemstack = event.getItem();
-        if ( itemstack.getItem() != ToolsForSurvivalItems.BOW_DRILL.get() ) return;
+        if ( itemstack.getItem() != ModItems.BOW_DRILL.get() ) return;
 
         HitResult result = player.pick(4.5D, 0.0f, false);
         if ( result.getType() != HitResult.Type.BLOCK ) return;

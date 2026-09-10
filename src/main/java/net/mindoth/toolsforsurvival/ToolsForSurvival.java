@@ -1,51 +1,25 @@
 package net.mindoth.toolsforsurvival;
 
-import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalEntities;
-import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalItems;
-import net.mindoth.toolsforsurvival.registries.ToolsForSurvivalModifiers;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.mindoth.toolsforsurvival.registries.ModEntities;
+import net.mindoth.toolsforsurvival.registries.ModItems;
+import net.mindoth.toolsforsurvival.registries.ModLootModifiers;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
 
 @Mod(ToolsForSurvival.MOD_ID)
 public class ToolsForSurvival {
     public static final String MOD_ID = "toolsforsurvival";
 
-    public ToolsForSurvival() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        if (FMLEnvironment.dist == Dist.CLIENT) {
-            ToolsForSurvivalClient.registerHandlers();
-        }
-        addRegistries(modEventBus);
+    public ToolsForSurvival(IEventBus modBus, ModContainer modContainer, Dist dist) {
+        if ( dist.isClient() ) ToolsForSurvivalClient.registerHandlers(modBus, modContainer);
+        addRegistries(modBus);
     }
 
-    private void addRegistries(final IEventBus modEventBus) {
-        ToolsForSurvivalItems.REGISTRY.register(modEventBus);
-        ToolsForSurvivalEntities.ENTITIES.register(modEventBus);
-        ToolsForSurvivalModifiers.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
-        modEventBus.addListener(this::addCreative);
-    }
-
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if ( event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES ) {
-            event.accept(ToolsForSurvivalItems.BOW_DRILL);
-            event.accept(ToolsForSurvivalItems.WOODEN_SICKLE);
-            event.accept(ToolsForSurvivalItems.STONE_SICKLE);
-            event.accept(ToolsForSurvivalItems.IRON_SICKLE);
-            event.accept(ToolsForSurvivalItems.GOLDEN_SICKLE);
-            event.accept(ToolsForSurvivalItems.DIAMOND_SICKLE);
-            event.accept(ToolsForSurvivalItems.NETHERITE_SICKLE);
-        }
-        if ( event.getTabKey() == CreativeModeTabs.COMBAT ) {
-            event.accept(ToolsForSurvivalItems.JAVELIN);
-        }
-        if ( event.getTabKey() == CreativeModeTabs.INGREDIENTS ) {
-            event.accept(ToolsForSurvivalItems.PLANT_FIBER);
-            event.accept(ToolsForSurvivalItems.PLANT_STRING);
-        }
+    private void addRegistries(final IEventBus modBus) {
+        ModItems.ITEMS.register(modBus);
+        ModEntities.ENTITIES.register(modBus);
+        ModLootModifiers.register(modBus);
     }
 }

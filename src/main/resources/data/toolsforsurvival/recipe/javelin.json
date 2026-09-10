@@ -8,18 +8,18 @@
 
   "key": {
     "R": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:rods/wooden"
     },
     "M": {
-      "tag": "forge:cobblestone"
+      "tag": "c:cobblestones/normal"
     },
     "S": {
-      "tag": "forge:string"
+      "item": "minecraft:string"
     }
   },
 
   "result": {
-    "item": "toolsforsurvival:javelin",
+    "id": "toolsforsurvival:javelin",
     "count": 1
   }
 }

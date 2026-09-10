@@ -7,7 +7,7 @@
     "item": "toolsforsurvival:diamond_sickle"
   },
   "result": {
-    "item": "toolsforsurvival:netherite_sickle"
+    "id": "toolsforsurvival:netherite_sickle"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

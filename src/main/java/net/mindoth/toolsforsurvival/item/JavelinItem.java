@@ -1,9 +1,11 @@
 package net.mindoth.toolsforsurvival.item;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import net.mindoth.toolsforsurvival.entity.ThrownJavelinEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Position;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -12,106 +14,125 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.Vanishable;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 
-public class JavelinItem extends Item implements Vanishable {
+import java.util.List;
+
+public class JavelinItem extends Item implements ProjectileItem {
     public static final int THROW_THRESHOLD_TIME = 10;
     public static final float BASE_DAMAGE = 8.0F;
     public static final float SHOOT_POWER = 2.5F;
-    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
-    public JavelinItem(Properties p_43381_) {
-        super(p_43381_);
-        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", 3.0D, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", (double)-2.4F, AttributeModifier.Operation.ADDITION));
-        this.defaultModifiers = builder.build();
+    public JavelinItem(Item.Properties properties) {
+        super(properties.attributes(createAttributes()).component(DataComponents.TOOL, createToolProperties()));
     }
 
-    public boolean canAttackBlock(BlockState p_43409_, Level p_43410_, BlockPos p_43411_, Player p_43412_) {
-        return !p_43412_.isCreative();
+    public static ItemAttributeModifiers createAttributes() {
+        return ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 3.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, -2.4, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
     }
 
-    public UseAnim getUseAnimation(ItemStack p_43417_) {
+    public static Tool createToolProperties() {
+        return new Tool(List.of(), 1.0F, 2);
+    }
+
+    @Override
+    public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
+        return !player.isCreative();
+    }
+
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.SPEAR;
     }
 
-    public int getUseDuration(ItemStack p_43419_) {
+    @Override
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 72000;
     }
 
-    public void releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int p_43397_) {
-        if (livingEntity instanceof Player player) {
-            int i = this.getUseDuration(itemStack) - p_43397_;
-            if (i >= 10) {
-                if (!level.isClientSide) {
-                    itemStack.hurtAndBreak(1, player, (p_43388_) -> p_43388_.broadcastBreakEvent(livingEntity.getUsedItemHand()));
-                }
-                ThrownJavelinEntity thrownJavelin = new ThrownJavelinEntity(level, player, itemStack);
+    @Override
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+        if ( entityLiving instanceof Player player ) {
+            int i = this.getUseDuration(stack, entityLiving) - timeLeft;
+            if ( i >= 10 ) {
+                if ( !level.isClientSide ) stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(entityLiving.getUsedItemHand()));
+
+                ThrownJavelinEntity thrownJavelin = new ThrownJavelinEntity(level, player, stack);
                 thrownJavelin.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
-                if (player.getAbilities().instabuild) {
-                    thrownJavelin.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
-                }
+
+                if ( player.getAbilities().instabuild ) thrownJavelin.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
 
                 level.addFreshEntity(thrownJavelin);
                 level.playSound((Player)null, thrownJavelin, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F);
-                if (!player.getAbilities().instabuild) {
-                    player.getInventory().removeItem(itemStack);
-                }
+                if ( !player.getAbilities().instabuild ) player.getInventory().removeItem(stack);
 
                 player.awardStat(Stats.ITEM_USED.get(this));
-
             }
         }
+
     }
 
-    public InteractionResultHolder<ItemStack> use(Level p_43405_, Player p_43406_, InteractionHand p_43407_) {
-        ItemStack itemstack = p_43406_.getItemInHand(p_43407_);
-        if (itemstack.getDamageValue() >= itemstack.getMaxDamage() - 1) {
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        if ( isTooDamagedToUse(itemstack) ) {
             return InteractionResultHolder.fail(itemstack);
         }
         else {
-            p_43406_.startUsingItem(p_43407_);
+            player.startUsingItem(hand);
             return InteractionResultHolder.consume(itemstack);
         }
     }
 
-    public boolean hurtEnemy(ItemStack p_43390_, LivingEntity p_43391_, LivingEntity p_43392_) {
-        p_43390_.hurtAndBreak(1, p_43392_, (p_43414_) -> {
-            p_43414_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-        });
+    private static boolean isTooDamagedToUse(ItemStack stack) {
+        return stack.getDamageValue() >= stack.getMaxDamage() - 1;
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         return true;
     }
 
-    public boolean mineBlock(ItemStack p_43399_, Level p_43400_, BlockState p_43401_, BlockPos p_43402_, LivingEntity p_43403_) {
-        if ((double)p_43401_.getDestroySpeed(p_43400_, p_43402_) != 0.0D) {
-            p_43399_.hurtAndBreak(2, p_43403_, (p_43385_) -> {
-                p_43385_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-            });
-        }
-
-        return true;
+    @Override
+    public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
     }
 
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot p_43383_) {
-        return p_43383_ == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(p_43383_);
-    }
-
+    @Override
     public int getEnchantmentValue() {
         return 1;
+    }
+
+    @Override
+    public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction) {
+        ThrownTrident throwntrident = new ThrownTrident(level, pos.x(), pos.y(), pos.z(), stack.copyWithCount(1));
+        throwntrident.pickup = AbstractArrow.Pickup.ALLOWED;
+        return throwntrident;
+    }
+
+    @Override
+    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+        return ItemAbilities.DEFAULT_TRIDENT_ACTIONS.contains(itemAbility);
     }
 }

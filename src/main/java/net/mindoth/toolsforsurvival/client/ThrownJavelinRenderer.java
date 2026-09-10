@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class ThrownJavelinRenderer extends EntityRenderer<ThrownJavelinEntity> {
-    public static final ResourceLocation JAVELIN_LOCATION = new ResourceLocation(ToolsForSurvival.MOD_ID,"textures/entity/thrown_javelin_model.png");
+    public static final ResourceLocation JAVELIN_LOCATION = ResourceLocation.fromNamespaceAndPath(ToolsForSurvival.MOD_ID, "textures/entity/thrown_javelin_model.png");
     private final ThrownJavelinModel model;
 
     public ThrownJavelinRenderer(EntityRendererProvider.Context p_174420_) {
@@ -27,7 +27,7 @@ public class ThrownJavelinRenderer extends EntityRenderer<ThrownJavelinEntity> {
         p_116114_.mulPose(Axis.YP.rotationDegrees(Mth.lerp(p_116113_, p_116111_.yRotO, p_116111_.getYRot()) - 90.0F));
         p_116114_.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(p_116113_, p_116111_.xRotO, p_116111_.getXRot()) + 90.0F));
         VertexConsumer vertexconsumer = ItemRenderer.getFoilBufferDirect(p_116115_, this.model.renderType(this.getTextureLocation(p_116111_)), false, p_116111_.isFoil());
-        this.model.renderToBuffer(p_116114_, vertexconsumer, p_116116_, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.model.renderToBuffer(p_116114_, vertexconsumer, p_116116_, OverlayTexture.NO_OVERLAY);
         p_116114_.popPose();
         super.render(p_116111_, p_116112_, p_116113_, p_116114_, p_116115_, p_116116_);
     }

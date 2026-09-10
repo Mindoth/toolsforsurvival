@@ -8,7 +8,7 @@
 
   "key": {
     "R": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:rods/wooden"
     },
     "M": {
       "item": "minecraft:diamond"
@@ -16,7 +16,7 @@
   },
 
   "result": {
-    "item": "toolsforsurvival:diamond_sickle",
+    "id": "toolsforsurvival:diamond_sickle",
     "count": 1
   }
 }

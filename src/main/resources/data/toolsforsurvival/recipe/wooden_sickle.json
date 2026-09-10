@@ -8,15 +8,15 @@
 
   "key": {
     "R": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:rods/wooden"
     },
     "M": {
-      "tag": "forge:cobblestone"
+      "tag": "minecraft:planks"
     }
   },
 
   "result": {
-    "item": "toolsforsurvival:stone_sickle",
+    "id": "toolsforsurvival:wooden_sickle",
     "count": 1
   }
 }

@@ -4,27 +4,31 @@ import net.mindoth.toolsforsurvival.ToolsForSurvival;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.level.BlockEvent;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = ToolsForSurvival.MOD_ID)
+@EventBusSubscriber(modid = ToolsForSurvival.MOD_ID)
 public class SickleItem extends DiggerItem {
 
-    public SickleItem(Tier p_43114_, float p_43115_, float p_43116_, Item.Properties p_43117_) {
-        super(p_43115_, p_43116_, p_43114_, BlockTags.MINEABLE_WITH_HOE, p_43117_);
+    public SickleItem(Tier tier, float damage, float speed, Item.Properties properties) {
+        super(tier, BlockTags.MINEABLE_WITH_HOE, properties.attributes(createAttributes(tier, damage, speed)));
     }
 
     @SubscribeEvent
@@ -52,6 +56,11 @@ public class SickleItem extends DiggerItem {
         }
         //level.destroyBlock(blockPos, false);
         level.removeBlock(blockPos, false);
-        player.getMainHandItem().hurtAndBreak(1, player, (holder) -> holder.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+
+        if ( level instanceof ServerLevel serverLevel ) {
+            ItemStack stack = player.getMainHandItem();
+            stack.hurtAndBreak(1, serverLevel, player,
+                    (holder) -> player.onEquippedItemBroken(stack.getItem(), player.getEquipmentSlotForItem(stack)));
+        }
     }
 }

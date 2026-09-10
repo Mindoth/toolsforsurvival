@@ -8,15 +8,15 @@
 
   "key": {
     "R": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:rods/wooden"
     },
     "S": {
-      "tag": "forge:string"
+      "item": "minecraft:string"
     }
   },
 
   "result": {
-    "item": "toolsforsurvival:bowdrill",
+    "id": "toolsforsurvival:bowdrill",
     "count": 1
   }
 }
